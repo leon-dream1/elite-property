@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
   const navigate = useNavigate();
   return (
-    <div className="lg:p-2">
-      <div className="navbar">
+    <div className="lg:p-2 bg-[#F8F9FA]">
+      <div className="navbar max-w-[1400px] mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,25 +31,25 @@ const Navbar = () => {
               <NavMenuItems
                 content="Home"
                 path="/"
-                activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+                activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
                 defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
               />
               <NavMenuItems
                 content="All Property"
                 path="/allProperty"
-                activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+                activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
                 defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
               />
               <NavMenuItems
                 content="DashBoard"
                 path="/dashBoard"
-                activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+                activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
                 defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
               />
               <NavMenuItems
                 content="Login"
                 path="/login"
-                activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+                activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
                 defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
               />
             </ul>
@@ -66,25 +66,25 @@ const Navbar = () => {
             <NavMenuItems
               content="Home"
               path="/"
-              activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+              activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
               defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
             />
             <NavMenuItems
               content="All Property"
               path="/allProperty"
-              activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+              activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
               defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
             />
             <NavMenuItems
               content="DashBoard"
               path="/dashBoard"
-              activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+              activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
               defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
             />
             <NavMenuItems
               content="Login"
               path="/login"
-              activeColor="text-[20px] font-playfair text-[#333333] font-bold"
+              activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
               defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
             />
           </ul>

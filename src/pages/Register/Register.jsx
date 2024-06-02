@@ -1,5 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { uploadImage } from "../../api/ImageUpload";
+import { useAuth } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const {
@@ -9,45 +12,33 @@ const Register = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  //   const { createUser, updateUserProfile, setUser, setLoading } = useAuth();
+  const { createUser, updateUserProfile, setUser, setLoading } = useAuth();
 
-  //   const navigate = useNavigate();
-
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
-   
-    
 
+    const photoURL = await uploadImage(data.image[0]);
+    console.log(photoURL);
 
-    //   const { name, email, photoURL, password } = data;
-    //   createUser(email, password)
-    //     // eslint-disable-next-line no-unused-vars
-    //     .then((result) => {
-    //       toast.success("Your Registration is successful.........");
-    //       updateUserProfile(name, photoURL)
-    //         .then(() => {
-    //           setUser(result.user);
-    //           setLoading(false);
-    //           axios
-    //             .post(
-    //               "https://hotello-booking-system-server.vercel.app/jwt",
-    //               { email: email },
-    //               { withCredentials: true }
-    //             )
-    //             .then((result) => {
-    //               setUser(result.user);
-    //               setLoading(false);
-    //               toast.success("Update is saved successfully......");
-    //               navigate("/");
-    //             });
-    //         })
-    //         .catch((error) => {
-    //           console.log(error);
-    //         });
-    //     })
-    //     .catch((error) => {
-    //       toast.error(error.message);
-    //     });
+    const { name, email, password } = data;
+    createUser(email, password)
+      // eslint-disable-next-line no-unused-vars
+      .then((result) => {
+        toast.success("Your Registration is successful.........");
+        updateUserProfile(name, photoURL)
+          .then(() => {
+            setUser(result.user);
+            setLoading(false);
+            toast.success("Update is saved successfully......");
+            navigate("/");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <div
@@ -109,8 +100,8 @@ const Register = () => {
             <input
               required
               type="file"
-              name="image"
               className="input input-bordered w-full pt-2"
+              {...register("image")}
               accept="image/*"
             />
           </div>

@@ -3,9 +3,11 @@ import Navbar from "../../components/Shared/Navbar";
 
 const MainLayout = () => {
   return (
-    <div className="max-w-[1400px] mx-auto">
+    <div>
       <Navbar />
-      <Outlet />
+      <div className="max-w-[1400px] mx-auto">
+        <Outlet />
+      </div>
     </div>
   );
 };
