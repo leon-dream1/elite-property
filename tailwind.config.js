@@ -5,8 +5,8 @@ export default {
     extend: {},
     fontFamily: {
       "open-sans": '"Open Sans", sans-serif',
-      playfair: '"Playfair Display", serif;',
+      "playfair": '"Playfair Display", serif;',
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
