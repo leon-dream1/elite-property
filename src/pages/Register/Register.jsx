@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { uploadImage } from "../../api/ImageUpload";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
@@ -12,7 +12,8 @@ const Register = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const { createUser, updateUserProfile, setUser, setLoading } = useAuth();
+  const { user, createUser, updateUserProfile, setUser, setLoading } =
+    useAuth();
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -40,6 +41,9 @@ const Register = () => {
         toast.error(error.message);
       });
   };
+
+  if (user) return <Navigate to={"/"} replace />;
+
   return (
     <div
       className="flex w-full max-w-md mx-auto overflow-hidden bg-white 
@@ -97,9 +101,14 @@ const Register = () => {
             ""
           )}
           <div>
+            <label htmlFor="image" className="block mb-2 text-sm">
+              Select Profile:
+            </label>
             <input
               required
               type="file"
+              id="profile"
+              placeholder="Select"
               className="input input-bordered w-full pt-2"
               {...register("image")}
               accept="image/*"

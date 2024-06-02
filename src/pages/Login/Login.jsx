@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import { FaGoogle } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useAuth } from "../../hooks/useAuth";
 
@@ -14,7 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { logInWithEmailAndPassword, googleLogin, faceBookLogin } = useAuth();
+  const { user, logInWithEmailAndPassword, googleLogin, faceBookLogin } = useAuth();
 
   const onSubmit = (data) => {
     setError("");
@@ -27,13 +26,13 @@ const Login = () => {
           email: "",
           password: "",
         });
-        axios
-          .post(
-            "https://hotello-booking-system-server.vercel.app/jwt",
-            { email },
-            { withCredentials: true }
-          )
-          .then(() => {});
+        // axios
+        //   .post(
+        //     "https://hotello-booking-system-server.vercel.app/jwt",
+        //     { email },
+        //     { withCredentials: true }
+        //   )
+        //   .then(() => {});
 
         navigate(location.state ? location.state : "/");
       })
@@ -48,6 +47,7 @@ const Login = () => {
       // eslint-disable-next-line no-unused-vars
       .then((result) => {
         toast.success("Log in successfully.........");
+        navigate(location.state ? location.state : "/");
       })
       .catch((err) => {
         console.log(err);
@@ -65,6 +65,9 @@ const Login = () => {
         console.log(err);
       });
   };
+
+  if (user) return <Navigate to={"/"} replace />;
+
   return (
     <>
       <div className="flex w-full max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-7xl h-[520px] mt-[50px] lg:mt-[150px]">
