@@ -7,6 +7,7 @@ import PageNotFound from "../pages/PageNotFound/PageNotFound";
 import AllProperty from "../pages/AllProperty/AllProperty";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
+import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 
 export const router = createBrowserRouter([
   {
@@ -40,5 +41,14 @@ export const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        
+      }
+    ]
   },
 ]);

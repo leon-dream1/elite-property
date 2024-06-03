@@ -3,39 +3,41 @@ import { useAuth } from "../../hooks/useAuth";
 import NavMenuItems from "../NavMenuItems/NavMenuItems";
 import { Link, useNavigate } from "react-router-dom";
 
-const navLink = (
-  <>
-    <NavMenuItems
-      content="Home"
-      path="/"
-      activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
-      defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
-    />
-    <NavMenuItems
-      content="All Property"
-      path="/allProperty"
-      activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
-      defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
-    />
-    <NavMenuItems
-      content="DashBoard"
-      path="/dashBoard"
-      activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
-      defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
-    />
-    <NavMenuItems
-      content="Login"
-      path="/login"
-      activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
-      defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
-    />
-  </>
-);
-
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logOut, setUser } = useAuth();
   console.log(user);
+
+  const navLink = (
+    <>
+      <NavMenuItems
+        content="Home"
+        path="/"
+        activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
+        defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
+      />
+      <NavMenuItems
+        content="All Property"
+        path="/allProperty"
+        activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
+        defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
+      />
+      <NavMenuItems
+        content="DashBoard"
+        path="/dashBoard"
+        activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
+        defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
+      />
+      {!user && (
+        <NavMenuItems
+          content="Login"
+          path="/login"
+          activeColor="text-[20px] font-playfair text-[#333333] font-extrabold"
+          defaultColor="text-[20px] text-[#003366] font-open-sans font-medium"
+        />
+      )}
+    </>
+  );
 
   const handleLogout = () => {
     logOut()
