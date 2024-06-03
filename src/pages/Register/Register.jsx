@@ -119,7 +119,7 @@ const Register = () => {
             <input
               type="submit"
               value="Register"
-              className="input input-bordered w-full bg-[#425CEC] text-white text-[22px] font-semibold font-merriweather cursor-pointer"
+              className="input input-bordered w-full bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer"
             />
           </div>
         </form>

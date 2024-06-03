@@ -9,6 +9,7 @@ import {
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebase/firebase.config";
 import { GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+// import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export const AuthContext = createContext();
 
@@ -16,6 +17,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  // const axiosPublic = useAxiosPublic();
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -57,6 +59,29 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+
+      // if (currentUser) {
+      //   const userInfo = { email: currentUser.email };
+      //   axiosPublic.post("/jwt", userInfo).then((res) => {
+      //     if (res.data.token) {
+      //       localStorage.setItem("token", res.data.token);
+      //       setLoading(false);
+
+      //       // const loggedInUser = {
+      //       //   email: currentUser?.email,
+      //       //   role: "user",
+      //       //   status: "Verified",
+      //       // };
+      //       // axiosPublic.post(`/users`, loggedInUser).then((data) => {
+      //       //   console.log(data);
+      //       //   // setLoading(false);
+      //       // });
+      //     }
+      //   });
+      // } else {
+      //   localStorage.removeItem("token");
+      //   setLoading(false);
+      // }
     });
 
     return () => {

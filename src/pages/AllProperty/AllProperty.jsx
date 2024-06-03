@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -6,16 +5,18 @@ import { useAuth } from "../../hooks/useAuth";
 
 const AllProperty = () => {
   const [allProperty, setAllProperty] = useState([]);
-  //   const [value, setValue] = useState([0, 2000]);
-  //   const [selectedRating, setSelectedRating] = useState("");
   const navigate = useNavigate();
   const { loading } = useAuth();
 
   useEffect(() => {
-    axios.get(`/data.json`).then((res) => {
-      setAllProperty(res.data);
-    });
+    fetch("/data.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setAllProperty(data);
+      });
   }, []);
+
+  console.log(allProperty);
 
   //   const handleRating = (e) => {
   //     setSelectedRating(e.target.value);
@@ -32,7 +33,7 @@ const AllProperty = () => {
   //         setAllRoom(res.data);
   //       });
   //   };
-
+  console.log(loading);
   if (loading)
     <div className="w-full max-w-lg mx-auto animate-pulse p-9 mt-[300px]">
       <h1 className="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>
@@ -57,7 +58,7 @@ const AllProperty = () => {
           >
             <img
               className="object-cover w-full h-56 cursor-pointer"
-              onClick={() => navigate(`/room/${property?._id}`)}
+              onClick={() => navigate(`/property/${property?._id}`)}
               src={property.property_image}
               alt="avatar"
             />
@@ -89,7 +90,7 @@ const AllProperty = () => {
                 </span>
               </p>
               <button
-                // onClick={() => navigate("/register")}
+                onClick={() => navigate(`/property/${property?._id}`)}
                 className="bg-black text-white text-[18px] py-[5px] lg:py-[15px]  rounded-md font-playfair hover:opacity-[0.8] w-full absolute bottom-[20px]"
               >
                 View Detail
