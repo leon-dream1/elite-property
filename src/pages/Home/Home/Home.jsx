@@ -1,7 +1,11 @@
+import { Helmet } from "react-helmet";
+
 const Home = () => {
   return (
     <div>
-      {/* <h1 className="font-playfair">This is Home</h1> */}
+      <Helmet>
+        <title>Elite Property | Your Perfect Place Awaits</title>
+      </Helmet>
     </div>
   );
 };

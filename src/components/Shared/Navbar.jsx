@@ -35,6 +35,7 @@ const navLink = (
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logOut, setUser } = useAuth();
+  console.log(user);
 
   const handleLogout = () => {
     logOut()

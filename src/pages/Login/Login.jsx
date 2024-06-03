@@ -36,7 +36,8 @@ const Login = () => {
 
         navigate(location.state ? location.state : "/");
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         setError("Password is Not matching");
         toast.error("password is incorrect");
       });
