@@ -10,6 +10,8 @@ import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import UserProfile from "../pages/DashBoard/User/UserProfile/UserProfile";
 import AddProperty from "../pages/DashBoard/Agent/AddProperty/AddProperty";
+import MyAddedProperty from "../pages/DashBoard/Agent/MyAddedProperty/MyAddedProperty";
+import UpdateMyAddedProperty from "../pages/DashBoard/Agent/MyAddedProperty/UpdateMyAddedProperty";
 
 export const router = createBrowserRouter([
   {
@@ -82,6 +84,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProperty />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myAddedProperty",
+        element: (
+          <PrivateRoute>
+            <MyAddedProperty />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "myAddedProperty/updateMyAddedProperty/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateMyAddedProperty />
           </PrivateRoute>
         ),
       },

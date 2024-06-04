@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
 import { Navigate, useNavigate } from "react-router-dom";
-import { uploadImage } from "../../api/ImageUpload";
+// import { uploadImage } from "../../api/ImageUpload";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Register = () => {
   const {
@@ -13,14 +14,28 @@ const Register = () => {
   } = useForm();
   const navigate = useNavigate();
 
-  const { user, createUser, updateUserProfile, setUser, setLoading } =
-    useAuth();
+  const axiosPublic = useAxiosPublic()
+
+  const { user, createUser, updateUserProfile, setUser, setLoading } = useAuth();
 
   const onSubmit = async (data) => {
     console.log(data);
 
-    const photoURL = await uploadImage(data.image[0]);
-    console.log(photoURL);
+    const imgFile = { image: data?.image[0] };
+
+    const { data: uploadedImg = "" } = await axiosPublic.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGEBB_API}`,
+      imgFile,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    const photoURL = uploadedImg.data.display_url;
+
+    // const photoURL = await uploadImage(data.image[0]);
+    // console.log(photoURL);
 
     const { name, email, password } = data;
     createUser(email, password)
