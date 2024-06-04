@@ -8,6 +8,7 @@ import AllProperty from "../pages/AllProperty/AllProperty";
 import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
+import UserProfile from "../pages/DashBoard/User/UserProfile/UserProfile";
 
 export const router = createBrowserRouter([
   {
@@ -29,7 +30,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/property/:id",
-        element: <PropertyDetails />,
+        element: (
+          <PrivateRoute>
+            <PropertyDetails />
+          </PrivateRoute>
+        ),
         loader: () => fetch(`/data.json`),
       },
       {
@@ -42,13 +47,20 @@ export const router = createBrowserRouter([
       },
     ],
   },
+
+  // DashBoard Related
   {
     path: "/dashboard",
     element: <DashboardLayout />,
     children: [
       {
-        
-      }
-    ]
+        index: "true",
+        element: <UserProfile />,
+      },
+      {
+        path: "myProfile",
+        element: <UserProfile />,
+      },
+    ],
   },
 ]);

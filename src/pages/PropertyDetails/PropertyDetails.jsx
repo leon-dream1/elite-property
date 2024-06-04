@@ -1,4 +1,6 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { useParams } from "react-router-dom";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 // import "react-datepicker/dist/react-datepicker.css";
 // import Modal from "react-modal";
 // import { Helmet } from "react-helmet";
@@ -17,13 +19,19 @@ import { useLoaderData, useParams } from "react-router-dom";
 // Modal.setAppElement("#root");
 
 const PropertyDetails = () => {
-  const allProperty = useLoaderData();
   const { id } = useParams();
+  const axiosSecure = useAxiosSecure();
+
   console.log("id", id);
 
-  const selectedProperty = allProperty.find(
-    (property) => property?._id === parseInt(id)
-  );
+  const { data: selectedProperty = {} } = useQuery({
+    queryKey: ["property", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/property/${id}`);
+      return data;
+    },
+  });
+
   console.log(selectedProperty);
 
   //   const { user } = useAuth();

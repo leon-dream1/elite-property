@@ -1,20 +1,30 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useAuth } from "../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AllProperty = () => {
-  const [allProperty, setAllProperty] = useState([]);
+  // const [allProperty, setAllProperty] = useState([]);
   const navigate = useNavigate();
+  const axiosSecure = useAxiosSecure();
   const { loading } = useAuth();
 
-  useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllProperty(data);
-      });
-  }, []);
+  const { data: allProperty = [] } = useQuery({
+    queryKey: ["allProperty"],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/property`);
+      return data;
+    },
+  });
+
+  // useEffect(() => {
+  //   fetch("/data.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setAllProperty(data);
+  //     });
+  // }, []);
 
   console.log(allProperty);
 
