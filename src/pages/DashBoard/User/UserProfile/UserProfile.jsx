@@ -20,7 +20,7 @@ const UserProfile = () => {
     );
 
   return (
-    <div className="flex justify-center items-center h-screen mt-[-20px]">
+    <div className="flex justify-center items-center h-screen">
       <Helmet>
         <title>Profile</title>
       </Helmet>
@@ -44,18 +44,18 @@ const UserProfile = () => {
               {role}
             </p>
           )}
-          {/* <p className="mt-2 text-xl font-medium text-gray-800 ">
-            User Id: {user?.uid}
-          </p> */}
+
           <div className="w-full p-2 mt-4 rounded-lg">
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-600 ">
               <p className="flex flex-col">
                 <span className="font-bold text-black ">
-                  {user?.displayName}
+                  Name: {user?.displayName}
                 </span>
               </p>
               <p className="flex flex-col">
-                <span className="font-bold text-black ">{user?.email}</span>
+                <span className="font-bold text-black ">
+                  Email: {user?.email}
+                </span>
               </p>
 
               {/* <div>

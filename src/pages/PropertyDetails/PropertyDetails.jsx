@@ -1,6 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useAuth } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
 // import "react-datepicker/dist/react-datepicker.css";
 // import Modal from "react-modal";
 // import { Helmet } from "react-helmet";
@@ -21,6 +23,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 const PropertyDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
 
   console.log("id", id);
 
@@ -32,7 +35,33 @@ const PropertyDetails = () => {
     },
   });
 
-  console.log(selectedProperty);
+  const { mutateAsync } = useMutation({
+    mutationFn: async (wishListData) => {
+      const { data } = await axiosSecure.post(
+        `/property/wishlist`,
+        wishListData
+      );
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.message) {
+        toast.error(data.message);
+      } else {
+        toast.success("Successfully add to Wishlist");
+      }
+    },
+  });
+
+  const handleWishList = async (id) => {
+    console.log(id);
+    const wishProperty = {
+      ...selectedProperty,
+      email: user?.email,
+    };
+    delete wishProperty?._id;
+    await mutateAsync(wishProperty);
+  };
 
   //   const { user } = useAuth();
   //   const navigate = useNavigate();
@@ -122,7 +151,7 @@ const PropertyDetails = () => {
           </div>
 
           <button
-            // onClick={handleBookButton}
+            onClick={() => handleWishList(selectedProperty?._id)}
             className="input input-bordered w-full bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer mb-4 mt-4"
           >
             Add To WishList

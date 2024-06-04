@@ -11,7 +11,7 @@ const Sidebar = () => {
   const [open, setOpen] = useState(true);
   const navigate = useNavigate();
   const [role] = useRole();
-  
+
   console.log("Role", role);
   const sidebarMenus =
     role === "user" ? UserMenus : role === "agent" ? AgentMenus : AdminMenus;
@@ -32,7 +32,8 @@ const Sidebar = () => {
         </span>
         <div className="flex gap-x-4 items-center">
           <h1
-            className={`text-white origin-left font-medium text-xl duration-200 ${
+            onClick={() => navigate("/")}
+            className={`text-white origin-left font-medium text-xl duration-200 cursor-pointer ${
               !open && "scale-0"
             }`}
           >

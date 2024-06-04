@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
-            setLoading(false);
+            // setLoading(false);
 
             const loggedInUser = {
               email: currentUser?.email,
@@ -74,7 +74,7 @@ const AuthProvider = ({ children }) => {
             };
             axiosPublic.post(`/users`, loggedInUser).then((data) => {
               console.log(data);
-              // setLoading(false);
+              setLoading(false);
             });
           }
         });

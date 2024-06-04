@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute/PrivateRoute";
 import PropertyDetails from "../pages/PropertyDetails/PropertyDetails";
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import UserProfile from "../pages/DashBoard/User/UserProfile/UserProfile";
+import AddProperty from "../pages/DashBoard/Agent/AddProperty/AddProperty";
 
 export const router = createBrowserRouter([
   {
@@ -51,15 +52,38 @@ export const router = createBrowserRouter([
   // DashBoard Related
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         index: "true",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
       },
+      //User
       {
         path: "myProfile",
-        element: <UserProfile />,
+        element: (
+          <PrivateRoute>
+            <UserProfile />
+          </PrivateRoute>
+        ),
+      },
+
+      //Agent
+      {
+        path: "addProperty",
+        element: (
+          <PrivateRoute>
+            <AddProperty />
+          </PrivateRoute>
+        ),
       },
     ],
   },
