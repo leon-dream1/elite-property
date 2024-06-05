@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 // import "react-datepicker/dist/react-datepicker.css";
 // import Modal from "react-modal";
 // import { Helmet } from "react-helmet";
@@ -63,62 +64,11 @@ const PropertyDetails = () => {
     await mutateAsync(wishProperty);
   };
 
-  //   const { user } = useAuth();
-  //   const navigate = useNavigate();
-  //   const [bookingDate, setBookingDate] = useState(new Date().toLocaleString());
-  //   const [modalIsOpen, setIsOpen] = useState(false);
-
-  //   function openModal() {
-  //     setIsOpen(true);
-  //   }
-
-  //   function closeModal() {
-  //     setIsOpen(false);
-  //   }
-
-  //   const handleBookButton = () => {
-  //     if (!user) {
-  //       return navigate("/login");
-  //     }
-  //     openModal();
-  //   };
-
-  //   const handleBooking = () => {
-  //     const bookingData = {
-  //       room_type: selectedRoom.room_type,
-  //       room_id: selectedRoom.room_id,
-  //       description: selectedRoom.description,
-  //       price_per_night: selectedRoom.price_per_night,
-  //       room_size: selectedRoom.room_size,
-  //       date: bookingDate,
-  //       review: selectedRoom.review,
-  //       images: selectedRoom.images,
-  //       special_offers: selectedRoom.special_offers,
-  //       email: user.email,
-  //       displayName: user.displayName,
-  //     };
-  //     console.table(bookingData);
-
-  //     axios
-  //       .post(
-  //         `https://hotello-booking-system-server.vercel.app/booking?id=${selectedRoom?._id}`,
-  //         bookingData
-  //       )
-  //       .then((res) => {
-  //         if (res.data.modifiedCount) {
-  //           closeModal();
-  //           toast("Congratulation!!!! Room is Booked For you");
-  //           navigate("/myBooking");
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   };
-
   return (
     <div className="container mx-auto mt-[100px] lg:mt-[100px]">
-      {/* <Helmet>
+      <Helmet>
         <title>Property Details Of {selectedProperty?._id}</title>
-      </Helmet> */}
+      </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center m-[20px] lg:m-0">
         <div>
           <img
@@ -139,7 +89,7 @@ const PropertyDetails = () => {
               </span>
             </p>
             <span className="bg-green-600 text-white text-[10px] px-[5px] lg:px-[5px] py-[5px] lg:py-[5px] pb-2">
-              {selectedProperty?.verification_status}
+              {selectedProperty?.status}
             </span>
             <span className="block text-[15px] md:[20px] lg:text-[20px] font-medium uppercase text-[#003366] font-playfair">
               Agent: {selectedProperty?.agent_name}

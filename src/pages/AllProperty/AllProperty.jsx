@@ -18,31 +18,9 @@ const AllProperty = () => {
     },
   });
 
-  // useEffect(() => {
-  //   fetch("/data.json")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setAllProperty(data);
-  //     });
-  // }, []);
 
   console.log(allProperty);
 
-  //   const handleRating = (e) => {
-  //     setSelectedRating(e.target.value);
-  //   };
-
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault();
-
-  //     axios
-  //       .get(
-  //         `https://hotello-booking-system-server.vercel.app/filterRoom?min=${value[0]}&max=${value[1]}&rating=${selectedRating}`
-  //       )
-  //       .then((res) => {
-  //         setAllRoom(res.data);
-  //       });
-  //   };
   console.log(loading);
   if (loading)
     <div className="w-full max-w-lg mx-auto animate-pulse p-9 mt-[300px]">
@@ -78,7 +56,7 @@ const AllProperty = () => {
                 {property?.property_title}
               </h2>
               <span className="bg-green-600 text-white text-[10px] px-[5px] lg:px-[5px] py-[5px] lg:py-[5px]">
-                {property?.verification_status}
+                {property?.status}
               </span>
               <p className="text-[#333333] font-open-sans">
                 Location : {property?.location}
