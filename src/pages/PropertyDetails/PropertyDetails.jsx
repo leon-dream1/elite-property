@@ -67,7 +67,7 @@ const PropertyDetails = () => {
   return (
     <div className="container mx-auto mt-[100px] lg:mt-[100px]">
       <Helmet>
-        <title>Property Details Of {selectedProperty?._id}</title>
+        <title>{`Property Details Of ${selectedProperty?._id}`}</title>
       </Helmet>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center m-[20px] lg:m-0">
         <div>

@@ -1,5 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 /* eslint-disable react/prop-types */
-const WishListDataRow = ({ property, handleVerifyOrRejectUser, handleRemove }) => {
+const WishListDataRow = ({ property, handleRemove }) => {
+  const navigate = useNavigate();
   return (
     <tr>
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
@@ -62,7 +65,7 @@ const WishListDataRow = ({ property, handleVerifyOrRejectUser, handleRemove }) =
 
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
         <button
-          onClick={() => handleVerifyOrRejectUser(property?._id, "verified")}
+          onClick={() => navigate(`offer/${property?._id}`)}
           className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
         >
           <span

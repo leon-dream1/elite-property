@@ -121,7 +121,6 @@ const WishList = () => {
                       property={property}
                       index={index}
                       handleRemove={handleRemove}
-                      //   handleDelete={handleDelete}
                     />
                   ))}
                 </tbody>
