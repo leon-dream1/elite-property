@@ -13,6 +13,7 @@ import AddProperty from "../pages/DashBoard/Agent/AddProperty/AddProperty";
 import MyAddedProperty from "../pages/DashBoard/Agent/MyAddedProperty/MyAddedProperty";
 import UpdateMyAddedProperty from "../pages/DashBoard/Agent/MyAddedProperty/UpdateMyAddedProperty";
 import ManageProperty from "../pages/DashBoard/Admin/ManageProperty/ManageProperty";
+import ManageUsers from "../pages/DashBoard/Admin/ManageUsers/ManageUsers";
 
 export const router = createBrowserRouter([
   {
@@ -111,6 +112,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageProperty />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manageUsers",
+        element: (
+          <PrivateRoute>
+            <ManageUsers />
           </PrivateRoute>
         ),
       },

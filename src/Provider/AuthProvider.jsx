@@ -58,17 +58,17 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // setLoading(false);
 
       if (currentUser) {
+        console.log("Current", currentUser);
         const userInfo = { email: currentUser.email };
+
         axiosPublic.post("/jwt", userInfo).then((res) => {
           if (res.data.token) {
             localStorage.setItem("token", res.data.token);
-            // setLoading(false);
-
             const loggedInUser = {
               email: currentUser?.email,
+              name: currentUser?.displayName,
               role: "user",
               status: "Verified",
             };
@@ -89,7 +89,7 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log(user);
+  console.log("user",user);
 
   const contextValue = {
     user,
