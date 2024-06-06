@@ -2,36 +2,40 @@ import { Helmet } from "react-helmet";
 import { useAuth } from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import PropertyDataRow from "./PropertyDataRow";
+import WishListDataRow from "./WishListDataRow";
 import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
-const MyAddedProperty = () => {
+const WishList = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   //   Fetch Property Data
-  const { data: allProperty = [], refetch } = useQuery({
-    queryKey: ["my-property", user?.email],
+  const { data: wishList = [], refetch } = useQuery({
+    queryKey: ["wishlist-property", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/myAddedProperty/${user?.email}`);
+      const { data } = await axiosSecure.get(
+        `/property/wishList/${user?.email}`
+      );
       return data;
     },
   });
 
-  console.log(allProperty);
+  console.log(wishList);
 
+  // For remove
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
-      const { data } = await axiosSecure.delete(`/property/${id}`);
+      const { data } = await axiosSecure.delete(`/property/wishlist/${id}`);
       return data;
     },
     onSuccess: async (data) => {
       console.log(data);
       refetch();
-      toast.success("Property Is deleted");
+      toast.success("Property Is deleted from wishlist");
     },
   });
 
-  const handleDelete = async (id) => {
+  const handleRemove = async (id) => {
     console.log(id);
     try {
       await mutateAsync(id);
@@ -111,11 +115,13 @@ const MyAddedProperty = () => {
                 <tbody>
                   {/* Room row data */}
 
-                  {allProperty.map((property) => (
-                    <PropertyDataRow
+                  {wishList.map((property, index) => (
+                    <WishListDataRow
                       key={property._id}
                       property={property}
-                      handleDelete={handleDelete}
+                      index={index}
+                      handleRemove={handleRemove}
+                      //   handleDelete={handleDelete}
                     />
                   ))}
                 </tbody>
@@ -128,4 +134,4 @@ const MyAddedProperty = () => {
   );
 };
 
-export default MyAddedProperty;
+export default WishList;
