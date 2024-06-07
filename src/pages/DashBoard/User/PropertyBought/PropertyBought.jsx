@@ -1,52 +1,26 @@
 import { Helmet } from "react-helmet";
-import { useAuth } from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import WishListDataRow from "./WishListDataRow";
-import { toast } from "react-toastify";
-// import { toast } from "react-toastify";
+import { useAuth } from "../../../../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
+import PropertyBoughtDataRow from "./PropertyBoughtDataRow";
 
-const WishList = () => {
+const PropertyBought = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   //   Fetch Property Data
-  const { data: wishList = [], refetch } = useQuery({
-    queryKey: ["wishlist-property", user?.email],
+  const { data: boughtProperty = [] } = useQuery({
+    queryKey: ["bought-property", user?.email],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(
-        `/property/wishList/${user?.email}`
-      );
+      const { data } = await axiosSecure.get(`/propertyOffer/${user?.email}`);
       return data;
     },
   });
 
-  console.log(wishList);
-
-  // For remove
-  const { mutateAsync } = useMutation({
-    mutationFn: async (id) => {
-      const { data } = await axiosSecure.delete(`/property/wishlist/${id}`);
-      return data;
-    },
-    onSuccess: async (data) => {
-      console.log(data);
-      refetch();
-      toast.success("Property Is deleted from wishlist");
-    },
-  });
-
-  const handleRemove = async (id) => {
-    console.log(id);
-    try {
-      await mutateAsync(id);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  console.log(boughtProperty);
   return (
     <div>
       <Helmet>
-        <title>WishList</title>
+        <title>My Property</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">
@@ -80,12 +54,7 @@ const WishList = () => {
                     >
                       Agent Name
                     </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Agent Image
-                    </th>
+
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
@@ -98,29 +67,17 @@ const WishList = () => {
                     >
                       Status
                     </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Action
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Action
-                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {/* Room row data */}
 
-                  {wishList.map((property, index) => (
-                    <WishListDataRow
+                  {boughtProperty.map((property, index) => (
+                    <PropertyBoughtDataRow
                       key={property._id}
                       property={property}
                       index={index}
-                      handleRemove={handleRemove}
+                      //   handleRemove={handleRemove}
                     />
                   ))}
                 </tbody>
@@ -133,4 +90,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default PropertyBought;

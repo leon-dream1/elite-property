@@ -16,6 +16,7 @@ import ManageProperty from "../pages/DashBoard/Admin/ManageProperty/ManageProper
 import ManageUsers from "../pages/DashBoard/Admin/ManageUsers/ManageUsers";
 import WishList from "../pages/DashBoard/User/WishList/WishList";
 import Offer from "../pages/DashBoard/User/Offer/Offer";
+import PropertyBought from "../pages/DashBoard/User/PropertyBought/PropertyBought";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +95,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Offer />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "propertyBought",
+        element: (
+          <PrivateRoute>
+            <PropertyBought />
           </PrivateRoute>
         ),
       },
