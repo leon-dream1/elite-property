@@ -65,7 +65,7 @@ const AddProperty = () => {
   console.log(errors);
 
   return (
-    <div className="mt-[40px] md:p-[60px] lg:mt-[80px]">
+    <div className="mt-[40px] md:p-[50px] lg:mt-[50px]">
       <h1 className="text-center text-[20px] md:text-[30px] lg:text-[40px] font-inter text-blue-700 font-medium mb-[40px]">
         Add Property Information
       </h1>

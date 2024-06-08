@@ -58,6 +58,7 @@ const PropertyDetails = () => {
     console.log(id);
     const wishProperty = {
       ...selectedProperty,
+      wish_property_id: id,
       email: user?.email,
     };
     delete wishProperty?._id;
