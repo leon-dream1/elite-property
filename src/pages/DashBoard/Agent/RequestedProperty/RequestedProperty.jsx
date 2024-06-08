@@ -1,49 +1,45 @@
 import { Helmet } from "react-helmet";
-import { useAuth } from "../../../../hooks/useAuth";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import PropertyDataRow from "./PropertyDataRow";
+import { useQuery } from "@tanstack/react-query";
+import RequestedPropertyDataRow from "./RequestedPropertyDataRow";
 import { toast } from "react-toastify";
 
-const MyAddedProperty = () => {
-  const { user } = useAuth();
-  console.log(user);
+const RequestedProperty = () => {
   const axiosSecure = useAxiosSecure();
-  //   Fetch Property Data
-  const { data: allProperty = [], refetch } = useQuery({
-    queryKey: ["my-property", user?.email],
+
+  //   Fetch Requested Property Data
+  const { data: requestedProperty = [], refetch } = useQuery({
+    queryKey: ["requested-property"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/myAddedProperty/${user?.email}`);
+      const { data } = await axiosSecure.get(`/requestedProperty`);
       return data;
     },
   });
 
-  console.log(allProperty);
-
-  const { mutateAsync } = useMutation({
-    mutationFn: async (id) => {
-      const { data } = await axiosSecure.delete(`/property/${id}`);
-      return data;
-    },
-    onSuccess: async (data) => {
-      console.log(data);
-      refetch();
-      toast.success("Property Is deleted");
-    },
-  });
-
-  const handleDelete = async (id) => {
+  const handleAcceptOrRejectPropertyRequest = async (id, status) => {
     console.log(id);
     try {
-      await mutateAsync(id);
-    } catch (err) {
-      console.log(err);
+      const { data } = await axiosSecure.patch(`/requestProperty/${id}`, {
+        status,
+      });
+      console.log(data);
+      if (data.modifiedCount > 0) {
+        refetch();
+        if (status === "accepted") {
+          toast.success("This Property Request  is Accepted.....");
+        } else {
+          toast.error("This Property Request is Rejected.....");
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
+
   return (
     <div>
       <Helmet>
-        <title>My Added Property</title>
+        <title>Requested Property</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">
@@ -53,12 +49,6 @@ const MyAddedProperty = () => {
               <table className="min-w-full leading-normal">
                 <thead>
                   <tr>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Image
-                    </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
@@ -75,25 +65,19 @@ const MyAddedProperty = () => {
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
-                      Agent Name
+                      Buyer Name
                     </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
-                      Agent Image
+                      Buyer Email
                     </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
-                      Price
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Status
+                      Offered Price
                     </th>
                     <th
                       scope="col"
@@ -112,11 +96,13 @@ const MyAddedProperty = () => {
                 <tbody>
                   {/* Room row data */}
 
-                  {allProperty.map((property) => (
-                    <PropertyDataRow
+                  {requestedProperty.map((property) => (
+                    <RequestedPropertyDataRow
                       key={property._id}
                       property={property}
-                      handleDelete={handleDelete}
+                      handleAcceptOrRejectPropertyRequest={
+                        handleAcceptOrRejectPropertyRequest
+                      }
                     />
                   ))}
                 </tbody>
@@ -129,4 +115,4 @@ const MyAddedProperty = () => {
   );
 };
 
-export default MyAddedProperty;
+export default RequestedProperty;
