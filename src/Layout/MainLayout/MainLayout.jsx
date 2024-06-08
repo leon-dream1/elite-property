@@ -6,7 +6,7 @@ const MainLayout = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-[1400px] mx-auto min-h-[calc(100vh-89px)]">
+      <div className="max-w-[1600px] mx-auto min-h-[calc(100vh-89px)]">
         <Outlet />
       </div>
       <Footer />
