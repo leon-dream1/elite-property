@@ -4,29 +4,38 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useAuth } from "../../hooks/useAuth";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
-// import "react-datepicker/dist/react-datepicker.css";
-// import Modal from "react-modal";
-// import { Helmet } from "react-helmet";
+import Modal from "react-modal";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import Review from "./Review";
 
-// const customStyles = {
-//   content: {
-//     top: "50%",
-//     left: "50%",
-//     right: "auto",
-//     bottom: "auto",
-//     marginRight: "-50%",
-//     transform: "translate(-50%, -50%)",
-//   },
-// };
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
-// Modal.setAppElement("#root");
+Modal.setAppElement("#root");
 
 const PropertyDetails = () => {
+  const {
+    register,
+    handleSubmit,
+    // formState: { errors },
+  } = useForm();
+
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const [isOpen, setIsOpen] = useState(false);
 
   console.log("id", id);
+  console.log(user);
 
   const { data: selectedProperty = {} } = useQuery({
     queryKey: ["property", id],
@@ -63,6 +72,30 @@ const PropertyDetails = () => {
     };
     delete wishProperty?._id;
     await mutateAsync(wishProperty);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const onSubmit = async (reviewData) => {
+    console.log(reviewData);
+    const reviewInfo = {
+      review_description: reviewData?.review_description,
+      property_title: selectedProperty?.property_title,
+      agent_name: selectedProperty?.agent_name,
+      reviewer_name: user?.displayName,
+      reviewer_email: user?.email,
+      reviewer_image: user?.photoURL,
+      property_id: selectedProperty?._id,
+      review_time: new Date().toLocaleString(),
+    };
+    console.table(reviewInfo);
+
+    const { data } = await axiosSecure.post("/review", reviewInfo);
+    if (data?.insertedId) {
+      toast.success("Thanks for your review");
+    }
   };
 
   return (
@@ -107,12 +140,14 @@ const PropertyDetails = () => {
           >
             Add To WishList
           </button>
-          <button className="input input-bordered w-full bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer">
+          <button
+            onClick={() => setIsOpen(true)}
+            className="input input-bordered w-full bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer"
+          >
             Give a Review
           </button>
-
-          {/* <Modal
-            isOpen={modalIsOpen}
+          <Modal
+            isOpen={isOpen}
             onRequestClose={closeModal}
             style={customStyles}
           >
@@ -122,43 +157,36 @@ const PropertyDetails = () => {
             >
               Close
             </button>
-            <div className="mt-4">
-              <span className="block text-[20px] md:[35px] lg:text-[50px] font-medium tracking-widest uppercase dark:text-violet-600">
-                {selectedRoom?.room_type}
-              </span>
-              <h2 className="text-[25px] font-semibold tracking-wide font-raleway text-blue-400 pt-2">
-                Price per Night: ${selectedRoom.price_per_night}
-              </h2>
-              <p className="pb-6 text-stone-600 text-xl">
-                Room size:
-                <span className="text-[#FFAC41]">{selectedRoom.room_size}</span>
+            <div className="mt-4 w-[400px]">
+              <p className="text-center font-playfair mb-4 font-semibold text-xl">
+                {selectedProperty?.property_title}
               </p>
-
-              <p className="text-xl pb-6 text-stone-600">
-                {selectedRoom.description}
-              </p>
-              <p className="text-xl font-von">
-                Booking Date : {bookingDate?.toLocaleString()}
-              </p>
-
-              <div className="mt-6">
-                <button
-                  onClick={handleBooking}
-                  className="input input-bordered w-full bg-[#425CEC] text-white text-[22px] font-semibold font-merriweather cursor-pointer"
-                >
-                  Confirm
-                </button>
-              </div>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-[20px]"
+              >
+                <div>
+                  <input
+                    type="textarea"
+                    placeholder="Description"
+                    className="input input-bordered w-full"
+                    required
+                    {...register("review_description")}
+                  />
+                </div>
+                <div>
+                  <input
+                    type="submit"
+                    value="Submit"
+                    className="input input-bordered w-full bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer"
+                  />
+                </div>
+              </form>
             </div>
-          </Modal> */}
-          {/* <button
-            // onClick={() => navigate(`/review/${selectedRoom?.room_id}`)}
-            className="mt-5 input input-bordered w-full bg-[#425CEC] text-white text-[22px] font-semibold font-merriweather"
-          >
-            Give a Review
-          </button> */}
+          </Modal>
         </div>
       </div>
+      <Review id={selectedProperty?._id}/>
     </div>
   );
 };
