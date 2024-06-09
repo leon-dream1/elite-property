@@ -3,26 +3,45 @@ import { Helmet } from "react-helmet";
 import { useAuth } from "../../hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const AllProperty = () => {
   // const [allProperty, setAllProperty] = useState([]);
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { loading } = useAuth();
+  const [location, setLocation] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
-  const { data: allProperty = [] } = useQuery({
-    queryKey: ["allProperty"],
+  console.log(sortBy);
+
+  const {
+    data: allProperty = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allProperty", sortBy],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/property`);
+      const { data } = await axiosSecure.get(
+        `/property?location=${location}&sortBy=${sortBy}`
+      );
       return data;
     },
   });
 
-
   console.log(allProperty);
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const form = e.target;
+
+    const location = form.search.value;
+    setLocation(location);
+    refetch();
+  };
+
   console.log(loading);
-  if (loading)
+  if (loading || isLoading)
     <div className="w-full max-w-lg mx-auto animate-pulse p-9 mt-[300px]">
       <h1 className="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>
 
@@ -37,6 +56,35 @@ const AllProperty = () => {
       <Helmet>
         <title>All Property</title>
       </Helmet>
+
+      <form
+        onSubmit={handleSearch}
+        className="w-[500px] mx-auto flex flex-row gap-2"
+      >
+        <input
+          type="text"
+          name="search"
+          placeholder="Search Property using Location"
+          className="flex-1 input input-bordered w-3/4"
+          required
+        />
+        <input
+          type="submit"
+          value="Search"
+          className="input input-bordered w-1/4 bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer"
+        />
+      </form>
+      <details className="dropdown">
+        <summary className="m-1 btn">Sort</summary>
+        <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+          <li onClick={() => setSortBy("asc")}>
+            <a>Asc</a>
+          </li>
+          <li onClick={() => setSortBy("desc")}>
+            <a>Desc</a>
+          </li>
+        </ul>
+      </details>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-[50px] m-4 lg:mt-[100px]">
         {allProperty.map((property) => (
