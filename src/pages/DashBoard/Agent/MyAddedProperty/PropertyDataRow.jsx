@@ -60,13 +60,13 @@ const PropertyDataRow = ({ property, handleDelete }) => {
             property?.status === "pending" && "bg-orange-400"
           } ${property?.status === "verified" && "bg-green-400"} ${
             property?.status === "rejected" && "bg-red-400"
-          }`}
+          } ${property?.status === "sold" && "bg-green-400"}`}
         >
           {property?.status}
         </p>
       </td>
 
-      {property?.status === "rejected" || (
+      {property?.status === "rejected" || property?.status === "sold" || (
         <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
           <button
             onClick={() => navigate(`updateMyAddedProperty/${property?._id}`)}
@@ -80,7 +80,7 @@ const PropertyDataRow = ({ property, handleDelete }) => {
           </button>
         </td>
       )}
-      <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
+     {property?.status === "sold" || <td className="px-3 py-3 border-b border-gray-200 bg-white text-sm">
         <button className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight">
           <span
             aria-hidden="true"
@@ -88,7 +88,7 @@ const PropertyDataRow = ({ property, handleDelete }) => {
           ></span>
           <span className="relative">Delete</span>
         </button>
-      </td>
+      </td>}
     </tr>
   );
 };

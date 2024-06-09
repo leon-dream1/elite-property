@@ -44,7 +44,7 @@ const PropertyBoughtDataRow = ({ property }) => {
             property?.status === "pending" && "bg-orange-400"
           } ${property?.status === "accepted" && "bg-green-400"} ${
             property?.status === "rejected" && "bg-red-400"
-          }`}
+          } ${property?.status === "bought" && "bg-green-400"}`}
         >
           {property?.status}
         </p>
@@ -72,7 +72,9 @@ const PropertyBoughtDataRow = ({ property }) => {
               aria-hidden="true"
               className="absolute inset-0 bg-green-200 opacity-80"
             ></span>
-            <span className="relative">Transaction ID: {property?.transactionId}</span>
+            <span className="relative">
+              Transaction ID: {property?.transactionId}
+            </span>
           </button>
         </td>
       ) : (

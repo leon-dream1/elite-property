@@ -57,6 +57,7 @@ const Offer = () => {
       property_title: selectedOfferProperty?.property_title,
       property_image: selectedOfferProperty?.property_image,
       agent_name: selectedOfferProperty?.agent_name,
+      agent_email: selectedOfferProperty?.agent_email,
       offered_price: data?.offered_price,
       buyer_name: data?.buyer_name,
       buyer_email: data?.buyer_email,

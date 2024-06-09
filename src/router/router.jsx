@@ -19,6 +19,7 @@ import Offer from "../pages/DashBoard/User/Offer/Offer";
 import PropertyBought from "../pages/DashBoard/User/PropertyBought/PropertyBought";
 import RequestedProperty from "../pages/DashBoard/Agent/RequestedProperty/RequestedProperty";
 import Payment from "../pages/DashBoard/User/Payment/Payment";
+import MySoldProperty from "../pages/DashBoard/Agent/MySoldProperty/MySoldProperty";
 
 export const router = createBrowserRouter([
   {
@@ -147,6 +148,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <RequestedProperty />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "mySoldProperty",
+        element: (
+          <PrivateRoute>
+            <MySoldProperty />
           </PrivateRoute>
         ),
       },
