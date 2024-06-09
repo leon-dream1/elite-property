@@ -20,6 +20,8 @@ import PropertyBought from "../pages/DashBoard/User/PropertyBought/PropertyBough
 import RequestedProperty from "../pages/DashBoard/Agent/RequestedProperty/RequestedProperty";
 import Payment from "../pages/DashBoard/User/Payment/Payment";
 import MySoldProperty from "../pages/DashBoard/Agent/MySoldProperty/MySoldProperty";
+import MyReview from "../pages/DashBoard/User/MyReview/MyReview";
+import ManageReview from "../pages/DashBoard/Admin/ManageReview/ManageReview";
 
 export const router = createBrowserRouter([
   {
@@ -117,6 +119,14 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path: "myReview",
+        element: (
+          <PrivateRoute>
+            <MyReview />
+          </PrivateRoute>
+        ),
+      },
 
       //Agent
       {
@@ -174,6 +184,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageUsers />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "manageReviews",
+        element: (
+          <PrivateRoute>
+            <ManageReview />
           </PrivateRoute>
         ),
       },

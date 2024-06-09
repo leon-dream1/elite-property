@@ -95,6 +95,7 @@ const PropertyDetails = () => {
     const { data } = await axiosSecure.post("/review", reviewInfo);
     if (data?.insertedId) {
       toast.success("Thanks for your review");
+      closeModal()
     }
   };
 
