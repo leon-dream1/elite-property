@@ -77,7 +77,6 @@ const PropertyBought = () => {
                       key={property._id}
                       property={property}
                       index={index}
-                      //   handleRemove={handleRemove}
                     />
                   ))}
                 </tbody>

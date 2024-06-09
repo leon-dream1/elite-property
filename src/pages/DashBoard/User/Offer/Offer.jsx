@@ -26,6 +26,8 @@ const Offer = () => {
     },
   });
 
+  console.log("select", selectedOfferProperty);
+
   // post a offer
   const { mutateAsync } = useMutation({
     mutationFn: async (offeredDetails) => {
@@ -59,7 +61,7 @@ const Offer = () => {
       buyer_name: data?.buyer_name,
       buyer_email: data?.buyer_email,
       status: "pending",
-      offer_property_id: selectedOfferProperty?._id,
+      offer_property_id: selectedOfferProperty?.wish_property_id,
     };
 
     console.table(offeredDetails);

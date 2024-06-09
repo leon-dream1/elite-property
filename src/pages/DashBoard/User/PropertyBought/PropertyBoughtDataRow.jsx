@@ -1,8 +1,8 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 /* eslint-disable react/prop-types */
 const PropertyBoughtDataRow = ({ property }) => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <tr>
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
@@ -52,7 +52,7 @@ const PropertyBoughtDataRow = ({ property }) => {
       {property?.status === "accepted" ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
-            // onClick={() => navigate(`offer/${property?._id}`)}
+            onClick={() => navigate(`payment/${property?._id}`)}
             className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight font-open-sans"
           >
             <span
@@ -60,6 +60,19 @@ const PropertyBoughtDataRow = ({ property }) => {
               className="absolute inset-0 bg-green-200 opacity-80"
             ></span>
             <span className="relative">PAY</span>
+          </button>
+        </td>
+      ) : property?.status === "bought" ? (
+        <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+          <button
+            onClick={() => navigate(`payment/${property?._id}`)}
+            className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight font-open-sans"
+          >
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-green-200 opacity-80"
+            ></span>
+            <span className="relative">Transaction ID: {property?.transactionId}</span>
           </button>
         </td>
       ) : (
