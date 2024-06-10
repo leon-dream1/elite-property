@@ -12,8 +12,9 @@ Currently, two official plugins are available:
 
 Live Link: https://elite-property-8bf86.web.app
 
-Admin username: admin@gmail.com
-Admin pass: Admin@@
+# admin info
+- email: admin@gmail.com
+- password: Admin@@ 
 
 # Feature
 
