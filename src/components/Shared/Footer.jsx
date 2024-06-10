@@ -7,12 +7,12 @@ const Footer = () => {
         <div className="">
           <Link
             to={"/"}
-            className="text-[35px] font-playfair font-extrabold cursor-pointer"
+            className="text-[20px] md:text-[35px] font-playfair font-extrabold cursor-pointer"
           >
             Elite Property
           </Link>
           <p className="text-[20px] font-inter text-[#003366] mt-2">
-            Discover Your Next Adventure: Your Trusted Hotel Management Partner
+            Discover Your Next Property: Your Trusted Real State Partner
           </p>
           <p className="text-[14px] font-raleway text-[#003366] mt-5">
             Embark on unforgettable journeys with our comprehensive hotel
@@ -22,7 +22,7 @@ const Footer = () => {
             and discovery.
           </p>
         </div>
-        <div className="flex flex-col items-center lg:items-start space-y-4 text-[18px] lg:pl-10">
+        <div className="flex flex-col items-center lg:items-start space-y-2 md:space-y-4 text-[18px] lg:pl-10">
           <h6 className="footer-title text-[#003366]">Services</h6>
           <NavLink to={"/"} className="link link-hover text-[#003366]">
             Home
@@ -68,7 +68,7 @@ const Footer = () => {
       </div>
       <footer className="footer footer-center py-8 bg-[#F8F9FA] text-base-content text-[16px]">
         <aside>
-          <p className="text-white">
+          <p className="text-black">
             Copyright © 2024 - All right reserved by Elite Property BD
           </p>
         </aside>
