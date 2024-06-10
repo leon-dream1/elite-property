@@ -73,6 +73,14 @@ const PropertyDetails = () => {
     setIsOpen(false);
   };
 
+  const { data: reviews = [], refetch } = useQuery({
+    queryKey: ["reviews", id],
+    queryFn: async () => {
+      const { data } = await axiosSecure(`/reviews/${id}`);
+      return data;
+    },
+  });
+
   const onSubmit = async (reviewData) => {
     const reviewInfo = {
       review_description: reviewData?.review_description,
@@ -90,6 +98,7 @@ const PropertyDetails = () => {
     if (data?.insertedId) {
       toast.success("Thanks for your review");
       closeModal();
+      refetch();
     }
   };
 
@@ -181,7 +190,7 @@ const PropertyDetails = () => {
           </Modal>
         </div>
       </div>
-      <Review id={selectedProperty?._id} />
+      <Review id={selectedProperty?._id} reviews={reviews} />
     </div>
   );
 };

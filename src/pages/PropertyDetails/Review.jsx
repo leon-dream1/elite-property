@@ -1,17 +1,17 @@
 /* eslint-disable react/prop-types */
-import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosSecure from "../../hooks/useAxiosSecure";
 
-const Review = ({ id }) => {
-  const axiosSecure = useAxiosSecure();
+const Review = ({ reviews }) => {
+  // const axiosSecure = useAxiosSecure();
 
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: async () => {
-      const { data } = await axiosSecure(`/reviews/${id}`);
-      return data;
-    },
-  });
+  // const { data: reviews = [] } = useQuery({
+  //   queryKey: ["reviews", id],
+  //   queryFn: async () => {
+  //     const { data } = await axiosSecure(`/reviews/${id}`);
+  //     return data;
+  //   },
+  // });
   return (
     <>
       {reviews.length > 0 ? (

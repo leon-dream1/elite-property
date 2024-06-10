@@ -49,6 +49,7 @@ const ManageUsers = () => {
   };
 
   const handleFraud = async (email) => {
+    // eslint-disable-next-line no-unused-vars
     const { data } = await axiosSecure.patch(`/fraudUser/${email}`, {
       status: "fraud",
     });
