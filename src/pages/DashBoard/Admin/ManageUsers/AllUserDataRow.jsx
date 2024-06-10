@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete }) => {
+const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete, handleFraud }) => {
   const blankSpace = (
     <>
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
@@ -38,7 +38,7 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete }) => {
           {user?.role?.toUpperCase()}
         </p>
       </td>
-      {user?.role !== "admin" ? (
+      {(user?.role !== "admin" && user?.status !== "fraud") ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
             onClick={() => handleUserRole(user?._id, "admin")}
@@ -71,10 +71,10 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete }) => {
       ) : (
         blankSpace
       )}
-      {user.role === "agent" ? (
+      {(user.role === "agent" && user?.status !== "fraud") ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
-            // onClick={() => handleVerifyOrRejectUser(property?._id, "rejected")}
+            onClick={() => handleFraud(user?.email, "fraud")}
             className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
           >
             <span
@@ -90,7 +90,7 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete }) => {
       {user.role !== "admin" ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
-              onClick={() => handleUserDelete(user?._id,)}
+            onClick={() => handleUserDelete(user?._id)}
             className="relative cursor-pointer inline-block px-3 py-1 font-semibold text-green-900 leading-tight"
           >
             <span

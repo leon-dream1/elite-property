@@ -45,6 +45,8 @@ const PropertyDetails = () => {
     },
   });
 
+  console.log(selectedProperty);
+
   const { mutateAsync } = useMutation({
     mutationFn: async (wishListData) => {
       const { data } = await axiosSecure.post(

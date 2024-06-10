@@ -78,14 +78,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 space-y-2 lg:space-y-0"
+              className="menu menu-sm dropdown-content mt-3 z-[10] p-2 shadow bg-base-100 rounded-box w-52 space-y-4 lg:space-y-0"
             >
               {navLink}
             </ul>
           </div>
           <Link
             to={"/"}
-            className="text-[35px] font-playfair font-bold cursor-pointer"
+            className="text-[16px] md:text-[35px] font-playfair font-bold cursor-pointer"
           >
             Elite Property
           </Link>

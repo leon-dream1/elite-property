@@ -1,16 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const UserReview = () => {
-  const axiosSecure = useAxiosSecure();
+  // const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
+
 
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews"],
     queryFn: async () => {
-      const { data } = await axiosSecure(`/allReviews`);
+      const { data } = await axiosPublic(`/allReviews`);
       return data;
     },
   });
+
+  console.log(reviews);
 
   return (
     <div className="mt-[80px]">

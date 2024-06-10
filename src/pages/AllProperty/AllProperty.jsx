@@ -6,11 +6,10 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useState } from "react";
 
 const AllProperty = () => {
-  // const [allProperty, setAllProperty] = useState([]);
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
   const { loading } = useAuth();
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(null);
   const [sortBy, setSortBy] = useState("");
 
   console.log(sortBy);
@@ -20,7 +19,7 @@ const AllProperty = () => {
     refetch,
     isLoading,
   } = useQuery({
-    queryKey: ["allProperty", sortBy],
+    queryKey: ["allProperty", sortBy, location],
     queryFn: async () => {
       const { data } = await axiosSecure.get(
         `/property?location=${location}&sortBy=${sortBy}`
@@ -38,6 +37,7 @@ const AllProperty = () => {
     const location = form.search.value;
     setLocation(location);
     refetch();
+    // form.reset()
   };
 
   console.log(loading);
@@ -59,14 +59,13 @@ const AllProperty = () => {
 
       <form
         onSubmit={handleSearch}
-        className="w-[500px] mx-auto flex flex-row gap-2"
+        className="w-[400px] md:w-[500px] mx-auto flex flex-row gap-2"
       >
         <input
           type="text"
           name="search"
           placeholder="Search Property using Location"
           className="flex-1 input input-bordered w-3/4"
-          required
         />
         <input
           type="submit"
@@ -74,7 +73,7 @@ const AllProperty = () => {
           className="input input-bordered w-1/4 bg-black text-white text-[22px] font-semibold font-playfair cursor-pointer"
         />
       </form>
-      <details className="dropdown">
+      <details className="dropdown mt-4 ml-2">
         <summary className="m-1 btn">Sort</summary>
         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
           <li onClick={() => setSortBy("asc")}>

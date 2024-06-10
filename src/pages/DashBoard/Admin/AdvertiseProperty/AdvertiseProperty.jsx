@@ -1,37 +1,41 @@
 import { Helmet } from "react-helmet";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import RequestedPropertyDataRow from "./RequestedPropertyDataRow";
+import AdvertisePropertyDataRow from "./AdvertisePropertyDataRow";
 import { toast } from "react-toastify";
-import { useAuth } from "../../../../hooks/useAuth";
 
-const RequestedProperty = () => {
+const AdvertiseProperty = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth()
 
-  //   Fetch Requested Property Data
-  const { data: requestedProperty = [], refetch } = useQuery({
-    queryKey: ["requested-property"],
+  //   Fetch Property Data
+  const { data: advertiseProperty = [] } = useQuery({
+    queryKey: ["advertiseProperty"],
     queryFn: async () => {
-      const { data } = await axiosSecure.get(`/requestedProperty/${user?.email}`);
+      const { data } = await axiosSecure.get(`/allProperty`);
       return data;
     },
   });
 
-  const handleAcceptOrRejectPropertyRequest = async (id, status) => {
-    console.log(id);
+  console.log(advertiseProperty);
+
+  const handleAdvertise = async (property) => {
+    const advertisePropertyData = {
+      ...property,
+      property_id: property?._id,
+    };
+    delete advertisePropertyData?._id;
+
+    console.log(advertisePropertyData);
     try {
-      const { data } = await axiosSecure.patch(`/requestProperty/${id}`, {
-        status,
-      });
+      const { data } = await axiosSecure.post(
+        `/advertiseProperty`,
+        advertisePropertyData
+      );
       console.log(data);
-      if (data.modifiedCount > 0) {
-        refetch();
-        if (status === "accepted") {
-          toast.success("This Property Request  is Accepted.....");
-        } else {
-          toast.error("This Property Request is Rejected.....");
-        }
+      if (data.insertedId) {
+        toast.success(data.message);
+      } else {
+        toast.error(data.message);
       }
     } catch (error) {
       console.log(error);
@@ -41,7 +45,7 @@ const RequestedProperty = () => {
   return (
     <div>
       <Helmet>
-        <title>Requested Property</title>
+        <title>Advertise Property</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">
@@ -55,37 +59,25 @@ const RequestedProperty = () => {
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
+                      Image
+                    </th>
+                    <th
+                      scope="col"
+                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                    >
                       Title
                     </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
-                      Location
+                      Agent Name
                     </th>
                     <th
                       scope="col"
                       className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                     >
-                      Buyer Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Buyer Email
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Offered Price
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-                    >
-                      Action
+                      Price
                     </th>
                     <th
                       scope="col"
@@ -96,15 +88,11 @@ const RequestedProperty = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* Room row data */}
-
-                  {requestedProperty.map((property) => (
-                    <RequestedPropertyDataRow
+                  {advertiseProperty.map((property) => (
+                    <AdvertisePropertyDataRow
                       key={property._id}
                       property={property}
-                      handleAcceptOrRejectPropertyRequest={
-                        handleAcceptOrRejectPropertyRequest
-                      }
+                      handleAdvertise={handleAdvertise}
                     />
                   ))}
                 </tbody>
@@ -117,4 +105,4 @@ const RequestedProperty = () => {
   );
 };
 
-export default RequestedProperty;
+export default AdvertiseProperty;

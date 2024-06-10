@@ -10,10 +10,12 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
   const { logOut } = useAuth();
 
-  axios.interceptors.request.use(
+  axiosSecure.interceptors.request.use(
     function (config) {
       //get token from localStorage
       const token = localStorage.getItem("token");
+
+      console.log(token);
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -24,12 +26,13 @@ const useAxiosSecure = () => {
   );
 
   // Add a response interceptor
-  axios.interceptors.response.use(
+  axiosSecure.interceptors.response.use(
     function (response) {
       return response;
     },
     async function (error) {
       // is 401 or 403
+      console.log(error);
       const status = error?.response?.status;
       if (status === 401 || status === 403) {
         await logOut();

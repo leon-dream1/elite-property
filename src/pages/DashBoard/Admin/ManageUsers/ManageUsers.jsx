@@ -16,8 +16,7 @@ const ManageUsers = () => {
     },
   });
 
-
-//    for update Role
+  //    for update Role
   const { mutateAsync: updateUserRole } = useMutation({
     mutationFn: async ({ id, role }) => {
       console.log(id, role);
@@ -33,8 +32,8 @@ const ManageUsers = () => {
   // Delete user
   const { mutateAsync: deleteUser } = useMutation({
     mutationFn: async (id) => {
-    //   console.log(id, role);
-      const { data } = await axiosSecure.delete(`/user/${id}`,);
+      //   console.log(id, role);
+      const { data } = await axiosSecure.delete(`/user/${id}`);
       return data;
     },
     onSuccess: () => {
@@ -51,9 +50,18 @@ const ManageUsers = () => {
 
   const handleUserDelete = async (id) => {
     console.log(id);
-    await deleteUser(id)
-  }
+    await deleteUser(id);
+  };
 
+  const handleFraud = async (email) => {
+    console.log(email);
+
+    const { data } = await axiosSecure.patch(`/fraudUser/${email}`, {
+      status: "fraud",
+    });
+    refetch()
+    console.log(data);
+  };
 
   return (
     <div>
@@ -128,6 +136,7 @@ const ManageUsers = () => {
                       index={index}
                       handleUserRole={handleUserRole}
                       handleUserDelete={handleUserDelete}
+                      handleFraud={handleFraud}
                     />
                   ))}
                 </tbody>

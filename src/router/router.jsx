@@ -22,6 +22,9 @@ import Payment from "../pages/DashBoard/User/Payment/Payment";
 import MySoldProperty from "../pages/DashBoard/Agent/MySoldProperty/MySoldProperty";
 import MyReview from "../pages/DashBoard/User/MyReview/MyReview";
 import ManageReview from "../pages/DashBoard/Admin/ManageReview/ManageReview";
+import AdvertiseProperty from "../pages/DashBoard/Admin/AdvertiseProperty/AdvertiseProperty";
+import AdminRoute from "./AdminRoute/AdminRoute";
+import AgentRoute from "./AgentRoute/AgentRoute";
 
 export const router = createBrowserRouter([
   {
@@ -133,7 +136,9 @@ export const router = createBrowserRouter([
         path: "addProperty",
         element: (
           <PrivateRoute>
-            <AddProperty />
+            <AgentRoute>
+              <AddProperty />
+            </AgentRoute>
           </PrivateRoute>
         ),
       },
@@ -141,7 +146,9 @@ export const router = createBrowserRouter([
         path: "myAddedProperty",
         element: (
           <PrivateRoute>
-            <MyAddedProperty />
+            <AgentRoute>
+              <MyAddedProperty />
+            </AgentRoute>
           </PrivateRoute>
         ),
       },
@@ -149,7 +156,9 @@ export const router = createBrowserRouter([
         path: "myAddedProperty/updateMyAddedProperty/:id",
         element: (
           <PrivateRoute>
-            <UpdateMyAddedProperty />
+            <AgentRoute>
+              <UpdateMyAddedProperty />
+            </AgentRoute>
           </PrivateRoute>
         ),
       },
@@ -157,7 +166,9 @@ export const router = createBrowserRouter([
         path: "requestProperty",
         element: (
           <PrivateRoute>
-            <RequestedProperty />
+            <AgentRoute>
+              <RequestedProperty />
+            </AgentRoute>
           </PrivateRoute>
         ),
       },
@@ -165,7 +176,9 @@ export const router = createBrowserRouter([
         path: "mySoldProperty",
         element: (
           <PrivateRoute>
-            <MySoldProperty />
+            <AgentRoute>
+              <MySoldProperty />
+            </AgentRoute>
           </PrivateRoute>
         ),
       },
@@ -175,7 +188,9 @@ export const router = createBrowserRouter([
         path: "manageProperties",
         element: (
           <PrivateRoute>
-            <ManageProperty />
+            <AdminRoute>
+              <ManageProperty />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -183,7 +198,9 @@ export const router = createBrowserRouter([
         path: "manageUsers",
         element: (
           <PrivateRoute>
-            <ManageUsers />
+            <AdminRoute>
+              <ManageUsers />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -191,7 +208,19 @@ export const router = createBrowserRouter([
         path: "manageReviews",
         element: (
           <PrivateRoute>
-            <ManageReview />
+            <AdminRoute>
+              <ManageReview />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "advertiseProperty",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <AdvertiseProperty />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },

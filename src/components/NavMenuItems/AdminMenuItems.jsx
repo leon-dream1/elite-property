@@ -2,6 +2,7 @@ import { IoMdHome } from "react-icons/io";
 import { GrUserManager } from "react-icons/gr";
 import { MdManageHistory } from "react-icons/md";
 import { VscPreview } from "react-icons/vsc";
+import { FaAdversal } from "react-icons/fa";
 
 export const AdminMenus = [
   { title: "Admin Profile", path: "myProfile", src: <IoMdHome size={25} /> },
@@ -19,5 +20,10 @@ export const AdminMenus = [
     title: "Manage reviews",
     path: "manageReviews",
     src: <VscPreview size={25} />,
+  },
+  {
+    title: "Advertise Property",
+    path: "advertiseProperty",
+    src: <FaAdversal size={25} />,
   },
 ];

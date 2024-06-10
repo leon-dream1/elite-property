@@ -10,7 +10,7 @@ import "swiper/css/navigation";
 const Banner = () => {
   return (
     <Swiper
-      className=""
+      className="z-10"
       navigation={true}
       pagination={{
         clickable: true,
@@ -25,9 +25,9 @@ const Banner = () => {
       {/* <SpecialOffer /> */}
       <SwiperSlide>
         <div
-          className={`h-[500px] md:h[700px] lg:h-[862px] bg-bgImg1 bg-no-repeat bg-cover z-10 rounded-lg`}
+          className={`h-[450px] md:h[700px] lg:h-[862px] bg-bgImg1 bg-no-repeat bg-cover z-10 rounded-lg`}
         >
-          <div className="h-[500px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
+          <div className="h-[450px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
             <h1 className="text-[30px] lg:text-[80px] font-playfair text-white font-extrabold">
               Welcome to <span className="text-[#FFAC41]">Elite Property</span>
             </h1>
@@ -42,10 +42,10 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div
-          className={`h-[500px] md:h[700px] lg:h-[862px] bg-bgImg2 bg-no-repeat bg-cover z-10 rounded-lg`}
+          className={`h-[450px] md:h[700px] lg:h-[862px] bg-bgImg2 bg-no-repeat bg-cover z-10 rounded-lg`}
         >
-          <div className="h-[500px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
-            <h1 className="text-[30px] lg:text-[80px] font-playfair text-white font-extrabold">
+          <div className="h-[450px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
+            <h1 className="text-[30px] lg:text-[80px] font-playfair text-white font-extrabold text-center">
               Discover Your
               <span className="text-[#FFAC41] font-playfair"> Place </span>
               To Live
@@ -61,9 +61,9 @@ const Banner = () => {
       </SwiperSlide>
       <SwiperSlide>
         <div
-          className={`h-[500px] md:h[700px] lg:h-[862px] bg-bgImg3 bg-no-repeat bg-cover z-10 rounded-lg`}
+          className={`h-[450px] md:h[700px] lg:h-[862px] bg-bgImg3 bg-no-repeat bg-cover z-10 rounded-lg`}
         >
-          <div className="h-[500px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
+          <div className="h-[450px] md:h[700px] lg:h-[862px] flex flex-col items-center justify-center bg-black opacity-75 rounded-lg space-y-3">
             <h1 className="text-[30px] lg:text-[80px] font-playfair text-white font-extrabold text-center">
               Beautiful{" "}
               <span className="text-[#FFAC41] font-playfair"> Houses </span>

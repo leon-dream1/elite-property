@@ -4,18 +4,24 @@ import useAxiosPublic from "../../../../hooks/useAxiosPublic";
 import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
 
 const AddProperty = () => {
   const { user } = useAuth();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
+  const [status, setStatus] = useState(null);
   const {
     register,
     handleSubmit,
     // eslint-disable-next-line no-unused-vars
     formState: { errors },
-    reset
+    reset,
   } = useForm();
+
+  useEffect(() => {
+    getUserStatus();
+  }, []);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (propertyData) => {
@@ -24,7 +30,7 @@ const AddProperty = () => {
     },
     onSuccess: () => {
       toast.success("Data is added wait for admin approval");
-      reset()
+      reset();
     },
   });
 
@@ -62,7 +68,17 @@ const AddProperty = () => {
     await mutateAsync(propertyData);
   };
 
-  console.log(errors);
+  const getUserStatus = async () => {
+    const { data } = await axiosSecure(`/user/${user?.email}`);
+    setStatus(data?.status);
+  };
+
+  if (status === "fraud")
+    return (
+      <h3 className="text-[15px] md:text-[30px] font-playfair font-semibold text-center mt-[50px]">
+        You cannot add property from now
+      </h3>
+    );
 
   return (
     <div className="mt-[40px] md:p-[50px] lg:mt-[50px]">
