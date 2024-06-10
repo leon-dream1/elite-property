@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete, handleFraud }) => {
+const AllUserDataRow = ({
+  user,
+  index,
+  handleUserRole,
+  handleUserDelete,
+  handleFraud,
+}) => {
   const blankSpace = (
     <>
       <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
@@ -38,7 +44,7 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete, handleF
           {user?.role?.toUpperCase()}
         </p>
       </td>
-      {(user?.role !== "admin" && user?.status !== "fraud") ? (
+      {user?.role !== "admin" && user?.status !== "fraud" ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
             onClick={() => handleUserRole(user?._id, "admin")}
@@ -49,6 +55,16 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete, handleF
               className="absolute inset-0 bg-black opacity-80 rounded-full"
             ></span>
             <span className="relative">Make Admin</span>
+          </button>
+        </td>
+      ) : user?.status === "fraud" ? (
+        <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
+          <button className="relative inline-block px-3 py-1 font-semibold text-white leading-tight">
+            <span
+              aria-hidden="true"
+              className="absolute inset-0 bg-red-800 rounded-full"
+            ></span>
+            <span className="relative uppercase">{user?.status}</span>
           </button>
         </td>
       ) : (
@@ -71,7 +87,7 @@ const AllUserDataRow = ({ user, index, handleUserRole, handleUserDelete, handleF
       ) : (
         blankSpace
       )}
-      {(user.role === "agent" && user?.status !== "fraud") ? (
+      {user.role === "agent" && user?.status !== "fraud" ? (
         <td className="px-5 py-3 border-b border-gray-200 bg-white text-sm">
           <button
             onClick={() => handleFraud(user?.email, "fraud")}
