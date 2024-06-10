@@ -39,26 +39,6 @@ const ManageProperty = () => {
     }
   };
 
-  //   const { mutateAsync } = useMutation({
-  //     mutationFn: async (id) => {
-  //       const { data } = await axiosSecure.delete(`/property/${id}`);
-  //       return data;
-  //     },
-  //     onSuccess: async (data) => {
-  //       console.log(data);
-  //       refetch();
-  //       toast.success("Property Is deleted");
-  //     },
-  //   });
-
-  //   const handleDelete = async (id) => {
-  //     console.log(id);
-  //     try {
-  //       await mutateAsync(id);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
   return (
     <div>
       <Helmet>
@@ -68,7 +48,7 @@ const ManageProperty = () => {
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">
           <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
-            <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
+            <div className="inline-block min-w-full shadow rounded-lg overflow-x-auto">
               <table className="min-w-full leading-normal">
                 <thead>
                   <tr>

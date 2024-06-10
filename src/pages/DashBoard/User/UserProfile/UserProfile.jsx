@@ -24,7 +24,7 @@ const UserProfile = () => {
       <Helmet>
         <title>Profile</title>
       </Helmet>
-      <div className="bg-white shadow-lg rounded-2xl w-3/5">
+      <div className="bg-white shadow-lg rounded-2xl w-4/5 lg:w-3/5">
         <img
           alt="profile"
           src="https://i.ibb.co/NrHhF9b/abstract-smooth-dark-blue-with-black-vignette-studio-well-use-as-background-business-report-digital.jpg"

@@ -27,17 +27,17 @@ const Sidebar = () => {
         <p className="w-4/5 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
       </div>
     );
-    
+
   return (
     <div className="flex">
       <div
         className={` ${
-          open ? "w-[300px]" : "w-20"
-        } bg-black h-screen p-5 pt-8 relative duration-300`}
+          open ? "w-[80px] lg:w-[300px]" : "w-20"
+        } bg-black min-h-screen p-5 pt-8 relative duration-300`}
       >
         <span
           className={`absolute cursor-pointer right-0 top-9 w-7 border-dark-purple border-2 rounded-full
-           ${!open && "rotate-180"}`}
+           ${!open && "rotate-180"} hidden lg:block`}
           onClick={() => setOpen(!open)}
         >
           <MdArrowForwardIos color="white" size={25} />
@@ -45,8 +45,8 @@ const Sidebar = () => {
         <div className="flex gap-x-4 items-center">
           <h1
             onClick={() => navigate("/")}
-            className={`text-white origin-left font-medium text-xl duration-200 cursor-pointer ${
-              !open && "scale-0"
+            className={`text-white origin-left font-medium text-[12px] lg:text-xl duration-200 cursor-pointer ${
+              !open && "scale-0 text-center"
             }`}
           >
             Elite Property
@@ -56,13 +56,16 @@ const Sidebar = () => {
           {sidebarMenus.map((Menu, index) => (
             <li
               key={index}
-              className={`flex rounded-md p-2 cursor-pointer hover:bg-blue-700 text-gray-300 text-sm items-center gap-x-4  `}
+              className={`flex rounded-md p-2 cursor-pointer hover:bg-blue-700 text-gray-300 text-sm items-center gap-x-4`}
+              title={Menu?.title}
               onClick={() => navigate(Menu?.path)}
             >
               <span> {Menu?.src}</span>
               <span
                 className={`${
                   !open && "hidden"
+                } ${
+                  open && "hidden lg:block"
                 } origin-left duration-200 text-[20px]`}
               >
                 {Menu.title}
