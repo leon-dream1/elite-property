@@ -6,7 +6,6 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const stripePromise = loadStripe(`${import.meta.env.VITE_STRIPE_TEST_PK}`);
-console.log(`${import.meta.env.VITE_STRIPE_TEST_PK}`);
 
 const Payment = () => {
   const { id } = useParams();
@@ -20,7 +19,6 @@ const Payment = () => {
       return data;
     },
   });
-  console.log("payy prop",property);
   return (
     <div className="w-[400px] mx-auto mt-[100px]">
       <h2 className="text-[30px] font-playfair mb-[50px] text-center">Please Payment</h2>

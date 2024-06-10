@@ -16,7 +16,6 @@ const AdvertiseProperty = () => {
     },
   });
 
-  console.log(advertiseProperty);
 
   const handleAdvertise = async (property) => {
     const advertisePropertyData = {
@@ -25,13 +24,11 @@ const AdvertiseProperty = () => {
     };
     delete advertisePropertyData?._id;
 
-    console.log(advertisePropertyData);
     try {
       const { data } = await axiosSecure.post(
         `/advertiseProperty`,
         advertisePropertyData
       );
-      console.log(data);
       if (data.insertedId) {
         toast.success(data.message);
       } else {

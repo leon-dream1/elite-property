@@ -4,7 +4,6 @@ import useRole from "../../hooks/useRole";
 
 const AgentRoute = ({ children }) => {
   const [role, isLoading] = useRole();
-  console.log(role);
 
   if (isLoading)
     return (

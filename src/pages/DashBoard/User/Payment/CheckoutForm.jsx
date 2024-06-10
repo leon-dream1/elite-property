@@ -28,7 +28,6 @@ const CheckoutForm = ({ property }) => {
 
   const getClientSecret = async (price) => {
     const { data } = await axiosSecure.post(`/create-payment-intent`, price);
-    console.log("clientSecret from server--->", data);
     setClientSecret(data.clientSecret);
   };
 
@@ -53,6 +52,7 @@ const CheckoutForm = ({ property }) => {
     }
 
     // Use your card Element with other Stripe.js APIs
+    // eslint-disable-next-line no-unused-vars
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -63,7 +63,6 @@ const CheckoutForm = ({ property }) => {
       setCardError(error);
       setProcessing(false);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
       setCardError("");
     }
 
@@ -87,7 +86,6 @@ const CheckoutForm = ({ property }) => {
     }
 
     if (paymentIntent.status === "succeeded") {
-      console.log(paymentIntent);
 
       // 1. Create payment info object
       delete property?.status;
@@ -99,12 +97,11 @@ const CheckoutForm = ({ property }) => {
         date: new Date(),
       };
       delete paymentInfo._id;
-      console.log(paymentInfo);
 
       try {
         // 2. save payment info in booking collection (db)
+        // eslint-disable-next-line no-unused-vars
         const { data } = await axiosSecure.post("/soldProperty", paymentInfo);
-        console.log(data);
 
         // 3. change property status to bought in db
         await axiosSecure.patch(`/soldProperty/${property?._id}`, {

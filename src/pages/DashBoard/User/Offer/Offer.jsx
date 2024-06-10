@@ -26,8 +26,6 @@ const Offer = () => {
     },
   });
 
-  console.log("select", selectedOfferProperty);
-
   // post a offer
   const { mutateAsync } = useMutation({
     mutationFn: async (offeredDetails) => {

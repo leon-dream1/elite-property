@@ -20,12 +20,10 @@ const ManageProperty = () => {
   });
 
   const handleVerifyOrRejectUser = async (id, status) => {
-    console.log(id);
     try {
       const { data } = await axiosSecure.patch(`/property/${id}`, {
         status,
       });
-      console.log(data);
       if (data.modifiedCount > 0) {
         refetch();
         if (status === "verified") {
@@ -42,7 +40,7 @@ const ManageProperty = () => {
   return (
     <div>
       <Helmet>
-        <title>All Property</title>
+        <title>Manage Property</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">

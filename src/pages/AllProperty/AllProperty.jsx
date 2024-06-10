@@ -12,8 +12,6 @@ const AllProperty = () => {
   const [location, setLocation] = useState(null);
   const [sortBy, setSortBy] = useState("");
 
-  console.log(sortBy);
-
   const {
     data: allProperty = [],
     refetch,
@@ -28,7 +26,6 @@ const AllProperty = () => {
     },
   });
 
-  console.log(allProperty);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -40,7 +37,6 @@ const AllProperty = () => {
     // form.reset()
   };
 
-  console.log(loading);
   if (loading || isLoading)
     <div className="w-full max-w-lg mx-auto animate-pulse p-9 mt-[300px]">
       <h1 className="h-2 bg-gray-300 rounded-lg w-52 dark:bg-gray-600"></h1>

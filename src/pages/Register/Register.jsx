@@ -19,7 +19,6 @@ const Register = () => {
   const { user, createUser, updateUserProfile, setUser, setLoading } = useAuth();
 
   const onSubmit = async (data) => {
-    console.log(data);
 
     const imgFile = { image: data?.image[0] };
 
@@ -33,9 +32,6 @@ const Register = () => {
       }
     );
     const photoURL = uploadedImg.data.display_url;
-
-    // const photoURL = await uploadImage(data.image[0]);
-    // console.log(photoURL);
 
     const { name, email, password } = data;
     createUser(email, password)

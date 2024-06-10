@@ -19,12 +19,10 @@ const RequestedProperty = () => {
   });
 
   const handleAcceptOrRejectPropertyRequest = async (id, status) => {
-    console.log(id);
     try {
       const { data } = await axiosSecure.patch(`/requestProperty/${id}`, {
         status,
       });
-      console.log(data);
       if (data.modifiedCount > 0) {
         refetch();
         if (status === "accepted") {

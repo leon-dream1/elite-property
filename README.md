@@ -12,7 +12,7 @@ Currently, two official plugins are available:
 
 Live Link: https://elite-property-8bf86.web.app
 
-# admin info
+# Admin info
 - email: admin@gmail.com
 - password: Admin@@ 
 

@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 
 const MyAddedProperty = () => {
   const { user } = useAuth();
-  console.log(user);
   const axiosSecure = useAxiosSecure();
   //   Fetch Property Data
   const { data: allProperty = [], refetch } = useQuery({
@@ -18,22 +17,20 @@ const MyAddedProperty = () => {
     },
   });
 
-  console.log(allProperty);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (id) => {
       const { data } = await axiosSecure.delete(`/property/${id}`);
       return data;
     },
+    // eslint-disable-next-line no-unused-vars
     onSuccess: async (data) => {
-      console.log(data);
       refetch();
       toast.success("Property Is deleted");
     },
   });
 
   const handleDelete = async (id) => {
-    console.log(id);
     try {
       await mutateAsync(id);
     } catch (err) {

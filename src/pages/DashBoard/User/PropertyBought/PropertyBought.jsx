@@ -16,7 +16,6 @@ const PropertyBought = () => {
     },
   });
 
-  console.log(boughtProperty);
   return (
     <div>
       <Helmet>

@@ -30,7 +30,6 @@ const UpdateMyAddedProperty = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     const imgFile = { image: data?.image[0] };
 
     const { data: uploadedImg = "" } = await axiosPublic.post(
@@ -64,11 +63,9 @@ const UpdateMyAddedProperty = () => {
       agent_image: user.photoURL,
       status: "pending",
     };
-    console.log(propertyData);
 
     try {
       const { data } = await axiosSecure.put(`/property/${id}`, propertyData);
-      console.log(data);
       if (data.modifiedCount > 0) {
         refetch();
         toast.success("Property data is updated successfully");

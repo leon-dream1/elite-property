@@ -16,7 +16,6 @@ const Login = () => {
   const { user, logInWithEmailAndPassword, googleLogin, faceBookLogin } = useAuth();
 
   const onSubmit = (data) => {
-    console.log(data);
     setError("");
     const { email, password } = data;
     logInWithEmailAndPassword(email, password)

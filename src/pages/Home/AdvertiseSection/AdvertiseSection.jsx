@@ -14,7 +14,6 @@ const AdvertiseSection = () => {
       return data;
     },
   });
-  console.log(advertiseProperty);
   return (
     <div className="container mx-auto mt-[50px]">
       <h1 className="text-[25px] md:text-[40px] text-[#333333] text-center font-playfair mb-7">

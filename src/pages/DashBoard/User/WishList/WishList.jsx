@@ -20,7 +20,6 @@ const WishList = () => {
     },
   });
 
-  console.log(wishList);
 
   // For remove
   const { mutateAsync } = useMutation({
@@ -28,15 +27,14 @@ const WishList = () => {
       const { data } = await axiosSecure.delete(`/property/wishlist/${id}`);
       return data;
     },
+    // eslint-disable-next-line no-unused-vars
     onSuccess: async (data) => {
-      console.log(data);
       refetch();
       toast.success("Property Is deleted from wishlist");
     },
   });
 
   const handleRemove = async (id) => {
-    console.log(id);
     try {
       await mutateAsync(id);
     } catch (err) {

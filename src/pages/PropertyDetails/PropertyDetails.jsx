@@ -34,9 +34,6 @@ const PropertyDetails = () => {
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("id", id);
-  console.log(user);
-
   const { data: selectedProperty = {} } = useQuery({
     queryKey: ["property", id],
     queryFn: async () => {
@@ -44,8 +41,6 @@ const PropertyDetails = () => {
       return data;
     },
   });
-
-  console.log(selectedProperty);
 
   const { mutateAsync } = useMutation({
     mutationFn: async (wishListData) => {
@@ -56,7 +51,6 @@ const PropertyDetails = () => {
       return data;
     },
     onSuccess: (data) => {
-      console.log(data);
       if (data.message) {
         toast.error(data.message);
       } else {
@@ -66,7 +60,6 @@ const PropertyDetails = () => {
   });
 
   const handleWishList = async (id) => {
-    console.log(id);
     const wishProperty = {
       ...selectedProperty,
       wish_property_id: id,
@@ -81,7 +74,6 @@ const PropertyDetails = () => {
   };
 
   const onSubmit = async (reviewData) => {
-    console.log(reviewData);
     const reviewInfo = {
       review_description: reviewData?.review_description,
       property_title: selectedProperty?.property_title,
@@ -97,7 +89,7 @@ const PropertyDetails = () => {
     const { data } = await axiosSecure.post("/review", reviewInfo);
     if (data?.insertedId) {
       toast.success("Thanks for your review");
-      closeModal()
+      closeModal();
     }
   };
 
@@ -189,7 +181,7 @@ const PropertyDetails = () => {
           </Modal>
         </div>
       </div>
-      <Review id={selectedProperty?._id}/>
+      <Review id={selectedProperty?._id} />
     </div>
   );
 };

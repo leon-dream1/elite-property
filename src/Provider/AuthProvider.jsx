@@ -60,7 +60,6 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
 
       if (currentUser) {
-        console.log("Current", currentUser);
         const userInfo = { email: currentUser.email };
 
         axiosPublic.post("/jwt", userInfo).then((res) => {
@@ -72,8 +71,8 @@ const AuthProvider = ({ children }) => {
               role: "user",
               status: "Verified",
             };
+            // eslint-disable-next-line no-unused-vars
             axiosPublic.post(`/users`, loggedInUser).then((data) => {
-              console.log(data);
               setLoading(false);
             });
           }
@@ -89,7 +88,6 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  console.log("user",user);
 
   const contextValue = {
     user,

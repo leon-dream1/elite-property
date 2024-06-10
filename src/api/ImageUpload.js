@@ -1,10 +1,8 @@
 import axios from "axios";
 
 export const uploadImage = async (image) => {
-  console.log(image);
   const formData = new FormData();
   formData.append('image', image);
-  console.log(formData);
 
   try {
     const { data } = await axios.post(

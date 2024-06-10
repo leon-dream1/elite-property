@@ -5,6 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 
 const AddProperty = () => {
   const { user } = useAuth();
@@ -54,7 +55,6 @@ const AddProperty = () => {
     delete data.image;
     delete data.min;
     delete data.max;
-    console.log(data);
 
     //Main added property data
     const propertyData = {
@@ -82,6 +82,9 @@ const AddProperty = () => {
 
   return (
     <div className="mt-[40px] md:p-[50px] lg:mt-[50px]">
+      <Helmet>
+        <title>Add Property</title>
+      </Helmet>
       <h1 className="text-center text-[20px] md:text-[30px] lg:text-[40px] font-inter text-blue-700 font-medium mb-[40px]">
         Add Property Information
       </h1>

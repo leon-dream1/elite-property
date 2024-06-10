@@ -15,7 +15,6 @@ const UserReview = () => {
     },
   });
 
-  console.log(reviews);
 
   return (
     <div className="mt-[80px]">

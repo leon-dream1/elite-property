@@ -6,7 +6,6 @@ const UserProfile = () => {
   const { user, loading } = useAuth() || {};
   const [role] = useRole();
 
-  console.log(user);
   if (loading)
     return (
       <div className="w-full max-w-lg mx-auto animate-pulse p-9 mt-[300px]">
@@ -22,7 +21,7 @@ const UserProfile = () => {
   return (
     <div className="flex justify-center items-center h-screen">
       <Helmet>
-        <title>Profile</title>
+        <title>My Profile</title>
       </Helmet>
       <div className="bg-white shadow-lg rounded-2xl w-4/5 lg:w-3/5">
         <img

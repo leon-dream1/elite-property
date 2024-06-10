@@ -17,10 +17,8 @@ const ManageReview = () => {
   });
 
   const handleReview = async (id) => {
-    console.log(id);
     try {
       const { data } = await axiosSecure.delete(`/myReview/${id}`);
-      console.log(data);
       if (data.deletedCount > 0) {
         refetch();
         toast.success("Review is deleted");
@@ -32,7 +30,7 @@ const ManageReview = () => {
   return (
     <div>
       <Helmet>
-        <title>My Reviews</title>
+        <title>Manage Reviews</title>
       </Helmet>
 
       <div className="container mx-auto px-4 sm:px-8">

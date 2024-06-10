@@ -16,12 +16,27 @@ const MySoldProperty = () => {
       return data;
     },
   });
-  
+
+  //   Fetch total amount
+  const { data: totalAmount = "" } = useQuery({
+    queryKey: ["amount", user?.email],
+    queryFn: async () => {
+      const { data } = await axiosSecure.get(`/totalAmount/${user?.email}`);
+      return data.price;
+    },
+  });
+
   return (
     <div>
       <Helmet>
         <title>My Sold Property</title>
       </Helmet>
+
+      <div className="text-center mt-5">
+        <h1 className="text-[30px] font-open-sans">
+          My Total Amount: ${totalAmount? totalAmount : 0.00}
+        </h1>
+      </div>
 
       <div className="container mx-auto px-4 sm:px-8">
         <div className="py-8">

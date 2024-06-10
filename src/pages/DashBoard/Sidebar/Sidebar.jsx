@@ -12,7 +12,6 @@ const Sidebar = () => {
   const navigate = useNavigate();
   const [role, isLoading] = useRole();
 
-  console.log("Role", role);
   const sidebarMenus =
     role === "user" ? UserMenus : role === "agent" ? AgentMenus : AdminMenus;
 
